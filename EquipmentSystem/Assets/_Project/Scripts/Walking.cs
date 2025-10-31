@@ -1,6 +1,7 @@
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Walking : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Walking : MonoBehaviour
 
     private Rigidbody m_Rigidbody;
     private Vector3 movement;
+    private Vector2 walkInput;
 
     private void Awake()
     {
@@ -37,14 +39,14 @@ public class Walking : MonoBehaviour
 
     private void FixedUpdate()
     {
+        movement = transform.right * walkInput.x + transform.forward * walkInput.y;
         m_Rigidbody.AddForce(movement * walkSpeed);
     }
 
     private void OnWalk(InputAction.CallbackContext context)
     {
         m_Rigidbody.linearDamping = 0;
-        Vector2 input = context.ReadValue<Vector2>();
-        movement = new Vector3(input.x, 0, input.y);
+        walkInput = context.ReadValue<Vector2>();
     }
     private void OnWalkCanceled(InputAction.CallbackContext context)
     {
