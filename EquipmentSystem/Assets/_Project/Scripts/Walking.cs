@@ -50,7 +50,7 @@ public class Walking : MonoBehaviour
     }
     private void OnWalkCanceled(InputAction.CallbackContext context)
     {
-        movement = Vector2.zero;
         m_Rigidbody.linearDamping = drag;
+        walkInput = context.ReadValue<Vector2>();
     }
 }

@@ -7,13 +7,15 @@ public class Interact : MonoBehaviour
 
     [SerializeField] private float interactDistance;
 
-    private GameObject Crosshair;
     private float interactInput;
+    private GameObject MainCamera;
+    private Player playerScript;
 
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
-        Crosshair = GameObject.FindWithTag("Crosshair");
+        MainCamera = GetComponentInChildren<Camera>().gameObject;
+        playerScript = GetComponent<Player>();
 
         PlayerInput.Player.Interact.performed += OnInteract;
         PlayerInput.Player.Interact.canceled += OnInteractCanceled;
@@ -34,10 +36,12 @@ public class Interact : MonoBehaviour
         if (interactInput > 0)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Crosshair.transform.forward, out hit, interactDistance, LayerMask.NameToLayer("Interactable")))
+            if (Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out hit, interactDistance))
             {
-                Debug.DrawRay(transform.position, transform.forward, Color.green);
-                hit.transform.GetComponent<IInteractable>().PickUp();
+                if(hit.transform.CompareTag("Interactable"))
+                {
+                    playerScript.PickUp(hit.transform.gameObject);
+                }
             }
         }
     }

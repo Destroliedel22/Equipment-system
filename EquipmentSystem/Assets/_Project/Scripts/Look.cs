@@ -9,7 +9,6 @@ public class Look : MonoBehaviour
     private GameObject Camera;
     private float xRotation = 0f;
 
-
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();

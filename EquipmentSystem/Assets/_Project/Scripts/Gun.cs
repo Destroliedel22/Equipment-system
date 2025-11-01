@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class Gun : IInteractable
+public class Gun : MonoBehaviour
 {
-    public void PickUp()
-    {
-        Debug.Log("hello");
-    }
+    private GameObject bulletHole;
 }

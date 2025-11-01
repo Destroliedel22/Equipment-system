@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 8504639158520474819}
   - component: {fileID: 630986352217506026}
   - component: {fileID: 4861272122224328419}
+  - component: {fileID: 6223676176718192646}
   - component: {fileID: 7908009722692350217}
+  - component: {fileID: 5392237641303070953}
   m_Layer: 0
   m_Name: HumanDummy
   m_TagString: Untagged
@@ -83,10 +85,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Height: 1.85
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.9, z: -0.2}
 --- !u!114 &630986352217506026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +116,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Look
   mouseSensitivity: 60
+--- !u!114 &6223676176718192646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060117565565411700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a210f81b32abf2844b29e282586aba1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  RHandHasItem: 0
+  RHand: {fileID: 5985701677961889364}
+  RHandItem: {fileID: 0}
+  LHandHasItem: 0
+  LHand: {fileID: 7379724977866818723}
+  LHandItem: {fileID: 0}
 --- !u!114 &7908009722692350217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +147,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interact
   interactDistance: 100
+--- !u!114 &5392237641303070953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060117565565411700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff4057fde5def4d96fe69397149f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Drop
 --- !u!1 &2304385464611639715
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +203,6 @@ GameObject:
   - component: {fileID: 994954538662019329}
   - component: {fileID: 8938185863129004828}
   - component: {fileID: 7440695056112351643}
-  - component: {fileID: 1130924876107493599}
   m_Layer: 0
   m_Name: RHand
   m_TagString: Untagged
@@ -250,27 +281,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1130924876107493599
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5985701677961889364}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6420443227319435766
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +430,6 @@ GameObject:
   - component: {fileID: 6574028255729234467}
   - component: {fileID: 1739822154979195379}
   - component: {fileID: 2972598415874685859}
-  - component: {fileID: 5671367010650077755}
   m_Layer: 0
   m_Name: LHand
   m_TagString: Untagged
@@ -499,24 +508,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5671367010650077755
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7379724977866818723}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
