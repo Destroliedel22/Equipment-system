@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,20 +6,20 @@ public class Interact : MonoBehaviour
 {
     public InputSystem_Actions PlayerInput;
 
-    [SerializeField] private float interactDistance;
-
-    private float interactInput;
-    private GameObject MainCamera;
     private Player playerScript;
+    private float lInteractInput;
+    private float rInteractInput;
 
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
-        MainCamera = GetComponentInChildren<Camera>().gameObject;
-        playerScript = GetComponent<Player>();
 
-        PlayerInput.Player.Interact.performed += OnInteract;
-        PlayerInput.Player.Interact.canceled += OnInteractCanceled;
+        PlayerInput.Player.LInteract.performed += OnLInteract;
+        PlayerInput.Player.LInteract.canceled += OnLInteractCanceled;
+        PlayerInput.Player.RInteract.performed += OnRInteract;
+        PlayerInput.Player.RInteract.canceled += OnRInteractCanceled;
+
+        playerScript = GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -31,28 +32,51 @@ public class Interact : MonoBehaviour
         PlayerInput.Disable();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (interactInput > 0)
+        Interacting();
+    }
+
+    private void Interacting()
+    {
+        if (lInteractInput > 0 && playerScript.LHandHasItem)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out hit, interactDistance))
+            var interactable = playerScript.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+
+            if (interactable != null)
             {
-                if(hit.transform.CompareTag("Interactable"))
-                {
-                    playerScript.PickUp(hit.transform.gameObject);
-                }
+                interactable.Interact();
+            }
+        }
+
+        if (rInteractInput > 0 && playerScript.RHandHasItem)
+        {
+            var interactable = playerScript.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+
+            if (interactable != null)
+            {
+                interactable.Interact();
             }
         }
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    private void OnLInteract(InputAction.CallbackContext context)
     {
-        interactInput = context.ReadValue<float>();
+        lInteractInput = context.ReadValue<float>();
     }
 
-    private void OnInteractCanceled(InputAction.CallbackContext context)
+    private void OnLInteractCanceled(InputAction.CallbackContext context)
     {
-        interactInput = context.ReadValue<float>();
+        lInteractInput = context.ReadValue<float>();
+    }
+
+    private void OnRInteract(InputAction.CallbackContext context)
+    {
+        rInteractInput = context.ReadValue<float>();
+    }
+
+    private void OnRInteractCanceled(InputAction.CallbackContext context)
+    {
+        rInteractInput = context.ReadValue<float>();
     }
 }

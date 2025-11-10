@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6223676176718192646}
   - component: {fileID: 7908009722692350217}
   - component: {fileID: 5392237641303070953}
+  - component: {fileID: 5598899832105334620}
   m_Layer: 0
   m_Name: HumanDummy
   m_TagString: Untagged
@@ -159,6 +160,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baff4057fde5def4d96fe69397149f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drop
+--- !u!114 &5598899832105334620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060117565565411700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d6dc6d871fa1e4dbffdf4edd3d9b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interact
 --- !u!1 &2304385464611639715
 GameObject:
   m_ObjectHideFlags: 0

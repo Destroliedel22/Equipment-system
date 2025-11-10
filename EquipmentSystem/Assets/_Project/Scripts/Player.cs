@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
-using static UnityEditor.Progress;
 
 public class Player : MonoBehaviour
 {
