@@ -10,8 +10,8 @@ public class Gun : MonoBehaviour, IInteractable
     [SerializeField] private float shootDistance;
 
     private GameObject Camera;
-    private int bullets;
 
+    public int bullets;
     public float ItemCooldown;
     public bool ItemOnCooldown;
 
@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour, IInteractable
         if(!ItemOnCooldown && bullets > 0)
         {
             Shoot();
+            Debug.Log(bullets);
         }
         else
         {
