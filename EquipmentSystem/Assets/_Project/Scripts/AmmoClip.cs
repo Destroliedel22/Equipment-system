@@ -17,6 +17,7 @@ public class AmmoClip : MonoBehaviour, IInteractable
         canInteract = true;
     }
 
+    //Reloads the gun and unequips the clip and drops it
     public void Interact()
     {
        Gun gunScript = playerScript.gameObject.GetComponentInChildren<Gun>();
@@ -27,16 +28,7 @@ public class AmmoClip : MonoBehaviour, IInteractable
             bulletsInsideText.text = "0";
             canInteract = false;
             this.gameObject.tag = "Untagged";
-            if (playerScript.LHandItem == this.gameObject)
-            {
-                playerScript.LHandHasItem = false;
-            }
-            else if (playerScript.RHandItem == this.gameObject)
-            {
-                playerScript.RHandHasItem = false;
-            }
-            GetComponent<Rigidbody>().isKinematic = false;
-            transform.parent = null;
+            playerScript.DropWithoutInput(this.gameObject);
         }
         else
         {

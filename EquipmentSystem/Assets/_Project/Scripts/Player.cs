@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         item.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    //Drops the item in the left hand first and then the right hand
+    //Drops the item in the left hand first and then the right hand when the button is clicked
     public void Drop()
     {
         if (LHandHasItem)
@@ -54,6 +54,23 @@ public class Player : MonoBehaviour
         else
         {
             //nothing equipped to be dropped
+        }
+    }
+
+    //Drops the item when no input is clicked
+    public void DropWithoutInput(GameObject item)
+    {
+        if(item == LHandItem)
+        {
+            LHandHasItem = false;
+            LHandItem.GetComponent<Rigidbody>().isKinematic = false;
+            LHandItem.transform.parent = null;
+        }
+        else if(item == RHandItem)
+        {
+            RHandHasItem = false;
+            RHandItem.GetComponent<Rigidbody>().isKinematic = false;
+            RHandItem.transform.parent = null;
         }
     }
 }
