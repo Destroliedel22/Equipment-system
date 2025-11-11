@@ -29,10 +29,11 @@ public class Gun : MonoBehaviour, IInteractable
         }
         else
         {
-            //Item on cooldown
+            //Gun on cooldown
         }
     }
 
+    //Shoots a raycast out of the camera middle point and spawns a particle effect on where it hit
     private void Shoot()
     {
         ItemOnCooldown = true;
@@ -47,6 +48,7 @@ public class Gun : MonoBehaviour, IInteractable
         bullets--;
     }
 
+    //Stops the muzzle flash particle effect from playing
     public IEnumerator StopFlash()
     {
         yield return new WaitForSeconds(ItemCooldown);
@@ -54,6 +56,7 @@ public class Gun : MonoBehaviour, IInteractable
         ItemOnCooldown = false;
     }
 
+    //Destroys the impact particle effect after half a second
     public IEnumerator DestroyImpact(ParticleSystem hit)
     {
         yield return new WaitForSeconds(0.5f);

@@ -14,6 +14,7 @@ public class Look : MonoBehaviour
         PlayerInput = new InputSystem_Actions();
         Camera = GetComponentInChildren<Camera>().gameObject;
 
+        //Get the input from the input actions and activate the function
         PlayerInput.Player.Look.performed += LookAround;
     }
 
@@ -27,8 +28,10 @@ public class Look : MonoBehaviour
         PlayerInput.Disable();
     }
 
+    //Moves the camera to where the mouse input is going
     private void LookAround(InputAction.CallbackContext context)
     {
+        //The value the input gives
         Vector2 input = context.ReadValue<Vector2>();
 
         float mouseX = input.x * mouseSensitivity * Time.deltaTime;

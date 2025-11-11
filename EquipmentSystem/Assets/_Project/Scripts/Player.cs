@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public GameObject LHand;
     public GameObject LHandItem;
 
+    //Picks up an object to the right hand first and the to the left hand
     public void PickUp(GameObject item)
     {
         if (!RHandHasItem)
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         item.GetComponent<Rigidbody>().isKinematic = true;
     }
 
+    //Drops the item in the left hand first and then the right hand
     public void Drop()
     {
         if (LHandHasItem)

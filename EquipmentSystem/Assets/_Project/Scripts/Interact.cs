@@ -13,13 +13,13 @@ public class Interact : MonoBehaviour
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
+        playerScript = GetComponent<Player>();
 
+        //Get the input from the input actions and activate the function
         PlayerInput.Player.LInteract.performed += OnLInteract;
         PlayerInput.Player.LInteract.canceled += OnLInteractCanceled;
         PlayerInput.Player.RInteract.performed += OnRInteract;
         PlayerInput.Player.RInteract.canceled += OnRInteractCanceled;
-
-        playerScript = GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -37,6 +37,7 @@ public class Interact : MonoBehaviour
         Interacting();
     }
 
+    //Checking if you can interact with an object in hand and interacting with it
     private void Interacting()
     {
         if (lInteractInput > 0 && playerScript.LHandHasItem)
@@ -62,21 +63,25 @@ public class Interact : MonoBehaviour
 
     private void OnLInteract(InputAction.CallbackContext context)
     {
+        //The value the input gives
         lInteractInput = context.ReadValue<float>();
     }
 
     private void OnLInteractCanceled(InputAction.CallbackContext context)
     {
+        //The value the input gives
         lInteractInput = context.ReadValue<float>();
     }
 
     private void OnRInteract(InputAction.CallbackContext context)
     {
+        //The value the input gives
         rInteractInput = context.ReadValue<float>();
     }
 
     private void OnRInteractCanceled(InputAction.CallbackContext context)
     {
+        //The value the input gives
         rInteractInput = context.ReadValue<float>();
     }
 }

@@ -18,6 +18,7 @@ public class PickUp : MonoBehaviour
         MainCamera = GetComponentInChildren<Camera>().gameObject;
         playerScript = GetComponent<Player>();
 
+        //Get the input from the input actions and activate the function
         PlayerInput.Player.Pickup.performed += OnPickup;
         PlayerInput.Player.Pickup.canceled += OnPickupCanceled;
     }
@@ -34,12 +35,18 @@ public class PickUp : MonoBehaviour
 
     private void FixedUpdate()
     {
+        PickingUp();
+    }
+
+    //Shoot a raycast to try and pickup an interactable object
+    private void PickingUp()
+    {
         if (PickupInput > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out hit, interactDistance))
             {
-                if(hit.transform.CompareTag("Interactable"))
+                if (hit.transform.CompareTag("Interactable"))
                 {
                     playerScript.PickUp(hit.transform.gameObject);
                 }
@@ -49,11 +56,13 @@ public class PickUp : MonoBehaviour
 
     private void OnPickup(InputAction.CallbackContext context)
     {
+        //The value the input gives
         PickupInput = context.ReadValue<float>();
     }
 
     private void OnPickupCanceled(InputAction.CallbackContext context)
     {
+        //The value the input gives
         PickupInput = context.ReadValue<float>();
     }
 }
