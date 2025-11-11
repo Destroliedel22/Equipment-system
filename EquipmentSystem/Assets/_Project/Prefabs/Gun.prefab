@@ -628,7 +628,6 @@ MonoBehaviour:
   bulletCountText: {fileID: 8563142806686501282}
   bullets: 0
   ItemCooldown: 0.5
-  ItemOnCooldown: 0
 --- !u!54 &7535530047601724141
 Rigidbody:
   m_ObjectHideFlags: 0

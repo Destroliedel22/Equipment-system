@@ -9,6 +9,8 @@ public class Interact : MonoBehaviour
     private Player playerScript;
     private float lInteractInput;
     private float rInteractInput;
+    private bool rItemOnCooldown;
+    private bool lItemOnCooldown;
 
     private void Awake()
     {
@@ -40,8 +42,9 @@ public class Interact : MonoBehaviour
     //Checking if you can interact with an object in hand and interacting with it
     private void Interacting()
     {
-        if (lInteractInput > 0 && playerScript.LHandHasItem)
+        if (lInteractInput > 0 && playerScript.LHandHasItem && !lItemOnCooldown)
         {
+            lItemOnCooldown = true;
             var interactable = playerScript.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
@@ -50,8 +53,9 @@ public class Interact : MonoBehaviour
             }
         }
 
-        if (rInteractInput > 0 && playerScript.RHandHasItem)
+        if (rInteractInput > 0 && playerScript.RHandHasItem && !rItemOnCooldown)
         {
+            rItemOnCooldown = true;
             var interactable = playerScript.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
@@ -71,6 +75,7 @@ public class Interact : MonoBehaviour
     {
         //The value the input gives
         lInteractInput = context.ReadValue<float>();
+        lItemOnCooldown = false;
     }
 
     private void OnRInteract(InputAction.CallbackContext context)
@@ -83,5 +88,6 @@ public class Interact : MonoBehaviour
     {
         //The value the input gives
         rInteractInput = context.ReadValue<float>();
+        rItemOnCooldown = false;
     }
 }

@@ -16,7 +16,6 @@ public class Gun : MonoBehaviour, IInteractable
 
     public int bullets;
     public float ItemCooldown;
-    public bool ItemOnCooldown;
 
     private void Awake()
     {
@@ -27,21 +26,20 @@ public class Gun : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(!ItemOnCooldown && bullets > 0)
+        if(bullets > 0)
         {
             Shoot();
             bulletCountText.text = bullets.ToString();
         }
         else
         {
-            //Gun on cooldown
+            //No bullets
         }
     }
 
     //Shoots a raycast out of the camera middle point and spawns a particle effect on where it hit
     private void Shoot()
     {
-        ItemOnCooldown = true;
         MuzzleFlash.Play();
         RaycastHit hit;
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, shootDistance))
@@ -73,7 +71,6 @@ public class Gun : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(ItemCooldown);
         MuzzleFlash.Stop();
-        ItemOnCooldown = false;
     }
 
     //Destroys the impact particle effect after half a second
