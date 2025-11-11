@@ -1,8 +1,11 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class AmmoClip : MonoBehaviour, IInteractable
 {
+    [SerializeField] private TextMeshProUGUI bulletsInsideText;
+
     private int bulletsInside;
     private Player playerScript;
     private bool canInteract;
@@ -20,7 +23,20 @@ public class AmmoClip : MonoBehaviour, IInteractable
 
         if(gunScript != null && canInteract)
         {
-            ReloadGun(gunScript);
+            gunScript.Reload(bulletsInside);
+            bulletsInsideText.text = "0";
+            canInteract = false;
+            this.gameObject.tag = "Untagged";
+            if (playerScript.LHandItem == this.gameObject)
+            {
+                playerScript.LHandHasItem = false;
+            }
+            else if (playerScript.RHandItem == this.gameObject)
+            {
+                playerScript.RHandHasItem = false;
+            }
+            GetComponent<Rigidbody>().isKinematic = false;
+            transform.parent = null;
         }
         else
         {
@@ -28,25 +44,5 @@ public class AmmoClip : MonoBehaviour, IInteractable
         }
     }
 
-    private void ReloadGun(Gun gun)
-    {
-        if(gun.bullets < 17)
-        {
-            canInteract = false;
-            gun.bullets += bulletsInside;
-            if(gun.bullets > 17)
-                gun.bullets = 17;
-            StartCoroutine(DestroyClip());
-        }
-        else
-        {
-            //Gun is full
-        }
-    }
 
-    public IEnumerator DestroyClip()
-    {
-        yield return new WaitForSeconds(0.2f);
-        Destroy(this.gameObject);
-    }
 }

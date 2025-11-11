@@ -1,5 +1,6 @@
+using JetBrains.Annotations;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Gun : MonoBehaviour, IInteractable
@@ -8,6 +9,8 @@ public class Gun : MonoBehaviour, IInteractable
     [SerializeField] private ParticleSystem MuzzleFlash;
     [SerializeField] private ParticleSystem Hit;
     [SerializeField] private float shootDistance;
+
+    [SerializeField] public TextMeshProUGUI bulletCountText;
 
     private GameObject Camera;
 
@@ -19,6 +22,7 @@ public class Gun : MonoBehaviour, IInteractable
     {
         Camera = FindAnyObjectByType<Camera>().gameObject;
         bullets = 17;
+        bulletCountText.text = bullets.ToString();
     }
 
     public void Interact()
@@ -26,7 +30,7 @@ public class Gun : MonoBehaviour, IInteractable
         if(!ItemOnCooldown && bullets > 0)
         {
             Shoot();
-            Debug.Log(bullets);
+            bulletCountText.text = bullets.ToString();
         }
         else
         {
@@ -47,6 +51,21 @@ public class Gun : MonoBehaviour, IInteractable
         }
         StartCoroutine(StopFlash());
         bullets--;
+    }
+
+    public void Reload(int bulletsInClip)
+    {
+        if (bullets < 17)
+        {
+            bullets += bulletsInClip;
+            if (bullets > 17)
+                bullets = 17;
+            bulletCountText.text = bullets.ToString();
+        }
+        else
+        {
+            //Gun is full
+        }
     }
 
     //Stops the muzzle flash particle effect from playing
