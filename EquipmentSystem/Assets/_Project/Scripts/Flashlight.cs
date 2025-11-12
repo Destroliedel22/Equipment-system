@@ -11,6 +11,7 @@ public class Flashlight : MonoBehaviour, IInteractable
         ActivateLight(spotLight);
     }
 
+    //Activates the light if disabled and disables the light when enabled
     public void ActivateLight(Light light)
     {
         if (light.enabled)

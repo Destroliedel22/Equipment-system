@@ -20,6 +20,7 @@ public class Rock : MonoBehaviour, IInteractable
         playerRb = Player.Instance.transform.GetComponent<Rigidbody>();
     }
 
+    //Drops the rock and add force multiplied by the velocity of the player
     public void Interact()
     {
         Player.Instance.DropWithoutInput(this.gameObject);

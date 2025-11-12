@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Where the gear can be placed
 public enum GearSlot
 {
     Head,

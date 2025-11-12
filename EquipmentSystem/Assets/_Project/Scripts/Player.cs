@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Equips gear on the right part of the body
     public void EquipGear(GameObject gear, GearSlot slot)
     {
         switch(slot)
@@ -115,6 +116,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Gets the position for where the gear should be equipped
     public void GearPosition(GameObject gear, GameObject gearSlot)
     {
         gear.transform.position = gearSlot.transform.position;
