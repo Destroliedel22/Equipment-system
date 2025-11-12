@@ -6,6 +6,7 @@ public class Rock : MonoBehaviour, IInteractable
     [Range(0, 1)]public float InheritFactor;
 
     private Rigidbody rb;
+    private Rigidbody playerRb;
     private Camera camera;
 
     private void Awake()
@@ -14,10 +15,15 @@ public class Rock : MonoBehaviour, IInteractable
         camera = FindAnyObjectByType<Camera>();
     }
 
+    private void Start()
+    {
+        playerRb = Player.Instance.transform.GetComponent<Rigidbody>();
+    }
+
     public void Interact()
     {
         Player.Instance.DropWithoutInput(this.gameObject);
-        Vector3 force = camera.transform.forward * ForceStrength + Player.Instance.GetComponent<Rigidbody>().linearVelocity * InheritFactor;
+        Vector3 force = camera.transform.forward * ForceStrength + playerRb.linearVelocity * InheritFactor;
         rb.linearVelocity = force;
     }
 }
