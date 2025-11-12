@@ -47,6 +47,10 @@ public class PickUp : MonoBehaviour
                 {
                     Player.Instance.PickUp(hit.transform.gameObject);
                 }
+                else if(hit.transform.CompareTag("Gear"))
+                {
+                    Player.Instance.EquipGear(hit.transform.gameObject, hit.transform.GetComponent<GearItem>().slot);
+                }
             }
         }
     }

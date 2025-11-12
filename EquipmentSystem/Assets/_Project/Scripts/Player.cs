@@ -5,6 +5,11 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
+    [SerializeField] private GameObject head;
+    [SerializeField] private GameObject body;
+    [SerializeField] private GameObject arms;
+    [SerializeField] private GameObject legs;
+
     public bool RHandHasItem;
     public GameObject RHand;
     public GameObject RHandItem;
@@ -89,5 +94,32 @@ public class Player : MonoBehaviour
             RHandItem.GetComponent<Rigidbody>().isKinematic = false;
             RHandItem.transform.parent = null;
         }
+    }
+
+    public void EquipGear(GameObject gear, GearSlot slot)
+    {
+        switch(slot)
+        {
+            case GearSlot.Head:
+                GearPosition(gear, head);
+                break;
+            case GearSlot.Body:
+                GearPosition(gear, body);
+                break;
+            case GearSlot.Arms:
+                GearPosition(gear, arms);
+                break;
+            case GearSlot.Legs:
+                GearPosition(gear, legs);
+                break;
+        }
+    }
+
+    public void GearPosition(GameObject gear, GameObject gearSlot)
+    {
+        gear.transform.position = gearSlot.transform.position;
+        gear.transform.rotation = gearSlot.transform.rotation;
+        gear.transform.parent = gearSlot.transform;
+        gear.GetComponent<Collider>().isTrigger = true;
     }
 }
