@@ -20,9 +20,12 @@ public class AmmoClip : MonoBehaviour, IInteractable
 
         if(gunScript != null)
         {
-            gunScript.Reload(bulletsInside);
-            bulletsInsideText.text = "0";
-            this.gameObject.tag = "Untagged";
+            int bulletsToReload = bulletsInside;
+            bulletsInside = gunScript.bullets;
+            bulletsInsideText.text = gunScript.bullets.ToString();
+            gunScript.Reload(bulletsToReload);
+            if (bulletsInside <= 0)
+                this.gameObject.tag = "Untagged";
             Player.Instance.DropWithoutInput(this.gameObject);
         }
         else

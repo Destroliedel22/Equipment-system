@@ -55,9 +55,7 @@ public class Gun : MonoBehaviour, IInteractable
     {
         if (bullets < 17)
         {
-            bullets += bulletsInClip;
-            if (bullets > 17)
-                bullets = 17;
+            bullets = bulletsInClip;
             bulletCountText.text = bullets.ToString();
         }
         else
