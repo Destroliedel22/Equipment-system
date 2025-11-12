@@ -9,13 +9,11 @@ public class PickUp : MonoBehaviour
 
     private float PickupInput;
     private GameObject MainCamera;
-    private Player playerScript;
 
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
         MainCamera = GetComponentInChildren<Camera>().gameObject;
-        playerScript = GetComponent<Player>();
 
         //Get the input from the input actions and activate the function
         PlayerInput.Player.Pickup.performed += OnPickup;
@@ -47,7 +45,7 @@ public class PickUp : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    playerScript.PickUp(hit.transform.gameObject);
+                    Player.Instance.PickUp(hit.transform.gameObject);
                 }
             }
         }

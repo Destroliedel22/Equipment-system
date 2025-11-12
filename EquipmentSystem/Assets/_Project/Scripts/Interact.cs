@@ -6,7 +6,6 @@ public class Interact : MonoBehaviour
 {
     public InputSystem_Actions PlayerInput;
 
-    private Player playerScript;
     private float lInteractInput;
     private float rInteractInput;
     private bool rItemOnCooldown;
@@ -15,7 +14,6 @@ public class Interact : MonoBehaviour
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
-        playerScript = GetComponent<Player>();
 
         //Get the input from the input actions and activate the function
         PlayerInput.Player.LInteract.performed += OnLInteract;
@@ -42,10 +40,10 @@ public class Interact : MonoBehaviour
     //Checking if you can interact with an object in hand and interacting with it
     private void Interacting()
     {
-        if (lInteractInput > 0 && playerScript.LHandHasItem && !lItemOnCooldown)
+        if (lInteractInput > 0 && Player.Instance.LHandHasItem && !lItemOnCooldown)
         {
             lItemOnCooldown = true;
-            var interactable = playerScript.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+            var interactable = Player.Instance.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
             {
@@ -53,10 +51,10 @@ public class Interact : MonoBehaviour
             }
         }
 
-        if (rInteractInput > 0 && playerScript.RHandHasItem && !rItemOnCooldown)
+        if (rInteractInput > 0 && Player.Instance.RHandHasItem && !rItemOnCooldown)
         {
             rItemOnCooldown = true;
-            var interactable = playerScript.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+            var interactable = Player.Instance.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
             {

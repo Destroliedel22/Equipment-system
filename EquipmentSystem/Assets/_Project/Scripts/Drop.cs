@@ -6,13 +6,11 @@ public class Drop : MonoBehaviour
     public InputSystem_Actions PlayerInput;
 
     private float dropInput;
-    private Player playerScript;
     private bool Dropped;
 
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
-        playerScript = GetComponent<Player>();
 
         //Get the input from the input actions and activate the function
         PlayerInput.Player.Drop.performed += OnDrop;
@@ -39,7 +37,7 @@ public class Drop : MonoBehaviour
     {
         if (dropInput > 0 && !Dropped)
         {
-            playerScript.Drop();
+            Player.Instance.Drop();
             Dropped = true;
         }
     }

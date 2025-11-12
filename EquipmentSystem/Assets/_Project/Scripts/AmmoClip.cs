@@ -7,25 +7,23 @@ public class AmmoClip : MonoBehaviour, IInteractable
     [SerializeField] private TextMeshProUGUI bulletsInsideText;
 
     private int bulletsInside;
-    private Player playerScript;
 
     private void Awake()
     {
-        playerScript = FindAnyObjectByType<Player>();
         bulletsInside = 16;
     }
 
     //Reloads the gun and unequips the clip and drops it
     public void Interact()
     {
-       Gun gunScript = playerScript.gameObject.GetComponentInChildren<Gun>();
+       Gun gunScript = Player.Instance.gameObject.GetComponentInChildren<Gun>();
 
         if(gunScript != null)
         {
             gunScript.Reload(bulletsInside);
             bulletsInsideText.text = "0";
             this.gameObject.tag = "Untagged";
-            playerScript.DropWithoutInput(this.gameObject);
+            Player.Instance.DropWithoutInput(this.gameObject);
         }
         else
         {

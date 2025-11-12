@@ -1,13 +1,30 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     public bool RHandHasItem;
     public GameObject RHand;
     public GameObject RHandItem;
     public bool LHandHasItem;
     public GameObject LHand;
     public GameObject LHandItem;
+
+    //Singleton so you can call this script easily
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     //Picks up an object to the right hand first and the to the left hand
     public void PickUp(GameObject item)
