@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,11 +10,13 @@ public class PickUp : MonoBehaviour
 
     private float PickupInput;
     private GameObject MainCamera;
+    private bool objectOnCooldown;
 
     private void Awake()
     {
         PlayerInput = new InputSystem_Actions();
         MainCamera = GetComponentInChildren<Camera>().gameObject;
+        objectOnCooldown = false;
 
         //Get the input from the input actions and activate the function
         PlayerInput.Player.Pickup.performed += OnPickup;
@@ -51,6 +54,12 @@ public class PickUp : MonoBehaviour
                 {
                     Player.Instance.EquipGear(hit.transform.gameObject, hit.transform.GetComponent<GearItem>().slot);
                 }
+                else if(hit.transform.CompareTag("StaticInteractable") && !objectOnCooldown)
+                {
+                    objectOnCooldown = true;
+                    Player.Instance.StaticObjectInteract(hit.transform.gameObject);
+                    StartCoroutine(StaticObjectCooldown());
+                }
             }
         }
     }
@@ -65,5 +74,11 @@ public class PickUp : MonoBehaviour
     {
         //The value the input gives
         PickupInput = context.ReadValue<float>();
+    }
+
+    IEnumerator StaticObjectCooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        objectOnCooldown = false;
     }
 }

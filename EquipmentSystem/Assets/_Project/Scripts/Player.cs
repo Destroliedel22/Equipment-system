@@ -124,4 +124,10 @@ public class Player : MonoBehaviour
         gear.transform.parent = gearSlot.transform;
         gear.GetComponent<Collider>().isTrigger = true;
     }
+
+    public void StaticObjectInteract(GameObject staticObject)
+    {
+        StaticInteractable staticObjectScript = staticObject.GetComponentInParent<StaticInteractable>();
+        staticObjectScript.Interact();
+    }
 }
