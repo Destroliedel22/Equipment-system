@@ -80,6 +80,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void GearDrop()
+    {
+        GameObject[] GearSlots = { head, body, arms, legs };
+
+        foreach(GameObject gearSlot in GearSlots)
+        {
+            if(gearSlot.transform.childCount > 0)
+            {
+                GameObject gear = gearSlot.transform.GetChild(0).gameObject;
+                gear.transform.parent = null;
+                gear.GetComponent<Rigidbody>().isKinematic = false;
+                gear.GetComponent<Collider>().isTrigger = false;
+            }
+        }
+    }
+
     //Drops the item when no input is clicked
     public void DropWithoutInput(GameObject item)
     {
@@ -124,6 +140,7 @@ public class Player : MonoBehaviour
         gear.transform.rotation = gearSlot.transform.rotation;
         gear.transform.parent = gearSlot.transform;
         gear.GetComponent<Collider>().isTrigger = true;
+        gear.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     public void StaticObjectInteract(GameObject staticObject)

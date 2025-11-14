@@ -6,6 +6,7 @@ public class Drop : MonoBehaviour
     public InputSystem_Actions PlayerInput;
 
     private float dropInput;
+    private float gearDropInput;
     private bool Dropped;
 
     private void Awake()
@@ -15,6 +16,8 @@ public class Drop : MonoBehaviour
         //Get the input from the input actions and activate the function
         PlayerInput.Player.Drop.performed += OnDrop;
         PlayerInput.Player.Drop.canceled += OnDropCanceled;
+        PlayerInput.Player.GearDrop.performed += OnGearDrop;
+        PlayerInput.Player.GearDrop.canceled += OnGearDropCanceled;
     }
 
     private void OnEnable()
@@ -40,6 +43,12 @@ public class Drop : MonoBehaviour
             Player.Instance.Drop();
             Dropped = true;
         }
+
+        if(gearDropInput > 0 && !Dropped)
+        {
+            Player.Instance.GearDrop();
+            Dropped = true;
+        }
     }
 
     private void OnDrop(InputAction.CallbackContext context)
@@ -53,5 +62,18 @@ public class Drop : MonoBehaviour
     {
         //The value the input gives
         dropInput = context.ReadValue<float>();
+    }
+
+    private void OnGearDrop(InputAction.CallbackContext context)
+    {
+        //The value the input gives
+        gearDropInput = context.ReadValue<float>();
+        Dropped = false;
+    }
+
+    private void OnGearDropCanceled(InputAction.CallbackContext context)
+    {
+        //The value the input gives
+        gearDropInput = context.ReadValue<float>();
     }
 }
