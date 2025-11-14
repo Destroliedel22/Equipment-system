@@ -51,7 +51,7 @@ public class Walking : MonoBehaviour
     private void OnWalk(InputAction.CallbackContext context)
     {
         //Keeps the player walking without force
-        m_Rigidbody.linearDamping = 0;
+        m_Rigidbody.linearDamping = 1;
         //The value the input gives
         walkInput = context.ReadValue<Vector2>();
     }

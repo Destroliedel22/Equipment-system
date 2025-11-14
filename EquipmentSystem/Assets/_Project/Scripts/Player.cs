@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public GameObject LHandItem;
 
     //Singleton so you can call this script easily
+    //Normally player scripts aren't singletons but this time there is only one
     private void Awake()
     {
         if (Instance == null)
