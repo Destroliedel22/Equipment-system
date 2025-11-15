@@ -37,13 +37,13 @@ public class Interact : MonoBehaviour
         Interacting();
     }
 
-    //Checking if you can interact with an object in hand and interacting with it
+    //Checking if you can interact with an object in hand and interact with it
     private void Interacting()
     {
-        if (lInteractInput > 0 && Player.Instance.LHandHasItem && !lItemOnCooldown)
+        if (lInteractInput > 0 && PlayerActionsManager.Instance.LHandHasItem && !lItemOnCooldown)
         {
             lItemOnCooldown = true;
-            var interactable = Player.Instance.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+            var interactable = PlayerActionsManager.Instance.playerScript.LHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
             {
@@ -51,10 +51,10 @@ public class Interact : MonoBehaviour
             }
         }
 
-        if (rInteractInput > 0 && Player.Instance.RHandHasItem && !rItemOnCooldown)
+        if (rInteractInput > 0 && PlayerActionsManager.Instance.RHandHasItem && !rItemOnCooldown)
         {
             rItemOnCooldown = true;
-            var interactable = Player.Instance.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
+            var interactable = PlayerActionsManager.Instance.playerScript.RHandItem.GetComponents<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault();
 
             if (interactable != null)
             {

@@ -145,15 +145,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GearDrop"",
-                    ""type"": ""Button"",
-                    ""id"": ""bf977c8c-0a50-449d-9604-a8118d9d5095"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=0.4)"",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -374,28 +365,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Drop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dfd7d3be-456a-4003-bccf-a3cdae0356e6"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearDrop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1b360a8f-0fe3-4a07-a6f6-365084d6ebe3"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearDrop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -989,7 +958,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_RInteract = m_Player.FindAction("RInteract", throwIfNotFound: true);
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
-        m_Player_GearDrop = m_Player.FindAction("GearDrop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1089,7 +1057,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RInteract;
     private readonly InputAction m_Player_Pickup;
     private readonly InputAction m_Player_Drop;
-    private readonly InputAction m_Player_GearDrop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1125,10 +1092,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Drop".
         /// </summary>
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/GearDrop".
-        /// </summary>
-        public InputAction @GearDrop => m_Wrapper.m_Player_GearDrop;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1173,9 +1136,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
-            @GearDrop.started += instance.OnGearDrop;
-            @GearDrop.performed += instance.OnGearDrop;
-            @GearDrop.canceled += instance.OnGearDrop;
         }
 
         /// <summary>
@@ -1205,9 +1165,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
-            @GearDrop.started -= instance.OnGearDrop;
-            @GearDrop.performed -= instance.OnGearDrop;
-            @GearDrop.canceled -= instance.OnGearDrop;
         }
 
         /// <summary>
@@ -1550,13 +1507,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrop(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "GearDrop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnGearDrop(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

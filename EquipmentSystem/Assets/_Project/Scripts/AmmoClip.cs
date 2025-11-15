@@ -16,7 +16,7 @@ public class AmmoClip : MonoBehaviour, IInteractable
     //Reloads the gun and unequips the clip and drops it
     public void Interact()
     {
-       Gun gunScript = Player.Instance.gameObject.GetComponentInChildren<Gun>();
+       Gun gunScript = PlayerActionsManager.Instance.playerScript.gameObject.GetComponentInChildren<Gun>();
 
         if(gunScript != null)
         {
@@ -33,7 +33,7 @@ public class AmmoClip : MonoBehaviour, IInteractable
                 bulletsInside = 16;
                 bulletsInsideText.text = "16";
             }
-            Player.Instance.DropWithoutInput(this.gameObject);
+            PlayerActionsManager.Instance.DropWithoutInput(this.gameObject);
         }
         else
         {

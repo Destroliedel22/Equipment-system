@@ -48,17 +48,11 @@ public class PickUp : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    Player.Instance.PickUp(hit.transform.gameObject);
+                    PlayerActionsManager.Instance.PickUp(hit.transform.gameObject);
                 }
                 else if(hit.transform.CompareTag("Gear"))
                 {
-                    Player.Instance.EquipGear(hit.transform.gameObject, hit.transform.GetComponent<GearItem>().slot);
-                }
-                else if(hit.transform.CompareTag("StaticInteractable") && !objectOnCooldown)
-                {
-                    objectOnCooldown = true;
-                    Player.Instance.StaticObjectInteract(hit.transform.gameObject);
-                    StartCoroutine(StaticObjectCooldown());
+                    PlayerActionsManager.Instance.EquipGear(hit.transform.gameObject, hit.transform.GetComponent<GearItem>().slot);
                 }
             }
         }
@@ -74,11 +68,5 @@ public class PickUp : MonoBehaviour
     {
         //The value the input gives
         PickupInput = context.ReadValue<float>();
-    }
-
-    IEnumerator StaticObjectCooldown()
-    {
-        yield return new WaitForSeconds(0.5f);
-        objectOnCooldown = false;
     }
 }

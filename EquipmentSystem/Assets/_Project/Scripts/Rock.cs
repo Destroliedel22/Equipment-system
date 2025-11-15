@@ -17,13 +17,13 @@ public class Rock : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        playerRb = Player.Instance.transform.GetComponent<Rigidbody>();
+        playerRb = PlayerActionsManager.Instance.playerScript.transform.GetComponent<Rigidbody>();
     }
 
     //Drops the rock and add force multiplied by the velocity of the player
     public void Interact()
     {
-        Player.Instance.DropWithoutInput(this.gameObject);
+        PlayerActionsManager.Instance.DropWithoutInput(this.gameObject);
         Vector3 force = camera.transform.forward * ForceStrength + playerRb.linearVelocity * InheritFactor;
         rb.linearVelocity = force;
     }

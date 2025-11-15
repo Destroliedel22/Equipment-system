@@ -59,15 +59,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "GearDrop",
-                    "type": "Button",
-                    "id": "bf977c8c-0a50-449d-9604-a8118d9d5095",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.4)",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -288,28 +279,6 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dfd7d3be-456a-4003-bccf-a3cdae0356e6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GearDrop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1b360a8f-0fe3-4a07-a6f6-365084d6ebe3",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GearDrop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
